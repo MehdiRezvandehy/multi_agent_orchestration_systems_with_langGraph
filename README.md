@@ -168,11 +168,3 @@ python supervisor_tool_calling.py
 ```
 
 These implementations are organized for extension and production use, allowing you to add your own agents, tools, and workflows.
-
-## References
-
-For a detailed discussion of the architectures, design trade-offs, and implementation details, visit my portfolio website.
-
-## License
-
-MIT License

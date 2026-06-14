@@ -29,3 +29,5 @@ services:
       --port=8888
       --allow-root
       --no-browser
+      --ServerApp.token=''
+      --ServerApp.password=''

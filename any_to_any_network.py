@@ -2,33 +2,64 @@
 # DECENTRALIZED ROUTING PROMPT CONFIGURATION
 # ============================================================
 ROUTING_PROMPT_TEMPLATE = """
-You are {agent_name} operating in a fully decentralized multi-agent system.
-You have full autonomy and access to the complete conversation history shared across all agents.
-Your task is to decide the next step in the workflow.
+You are {agent_name} operating in a fully decentralized multi-agent network.
+
+You have access to the complete shared conversation history and can independently decide 
+the next step required to solve the user's request.
+
+Your objective is to either:
+1. Complete the task if you have sufficient information and capability.
+2. Delegate the task to the most appropriate agent if additional work is required.
+
+## Available Agents
+
+- symbolic_reasoning_agent:
+  Planning, decomposition, logical reasoning.
+
+- google_search_agent:
+  Search the web and retrieve current information.
+
+- python_agent:
+  Execute Python code, perform calculations,
+  data analysis, and visualization.
 
 ## Decision Process
 
 Choose exactly ONE action:
 
-### Continue solving
-Select the best next agent:
-- symbolic_reasoning_agent
-- google_search_agent
-- python_agent
+### Option 1: Continue Solving
 
-### Finish the task
-If the task is complete:
+If more work is required, select the single best agent to perform the next step:
+
+next_agent = "<agent_name>"
+
+Provide a brief explanation of why this agent is best suited for the next action.
+
+### Option 2: Finish the Task
+
+If the user's request has been fully resolved:
+
 next_agent = "END"
 
-and provide:
-final_response = complete answer to the user
+Provide:
+
+final_response = "<complete answer for the user>"
+
+## Delegation Guidelines
+
+- Delegate only if another agent can make better progress.
+- Choose the agent best suited for the remaining work.
+- Avoid unnecessary handoffs and repeated work.
+- Complete the task yourself whenever possible.
 
 ## Rules
-- Never output null for next_agent.
-- Only select ONE next agent.
+
+- Always provide a valid `next_agent`.
+- Select exactly one agent or `END`.
+- Never use `null`.
 - No supervisor exists.
-- Any agent may delegate to any other agent.
-- Avoid repeating completed work.
+- Any agent may delegate to any other agent.    
+
 """
 
 from typing import Literal, TypedDict, Annotated
@@ -85,26 +116,60 @@ def autonomous_agent_node(state: AgentState, agent_name: str):
     ])
 
     next_agent = routing_decision.next_agent
-    if next_agent not in {"symbolic_reasoning_agent", "google_search_agent", "python_agent", "END"}:
+
+    # ------------------------------------------------
+    # Safety fallback
+    # ------------------------------------------------
+    valid_agents = {
+        "symbolic_reasoning_agent",
+        "google_search_agent",
+        "python_agent",
+        "END",
+    }
+
+    if next_agent not in valid_agents:
         next_agent = "symbolic_reasoning_agent"
 
+    # ------------------------------------------------
+    # Finish workflow
+    # ------------------------------------------------
     if next_agent == "END":
-        final_response = routing_decision.final_response or last_message.content or "Task completed."
+
+        final_response = (
+            routing_decision.final_response
+            or last_message.content
+            or "Task completed."
+        )
+
         return Command(
             goto=END,
             update={
-                "messages": [AIMessage(content=final_response)],
+                "messages": [
+                    AIMessage(content=final_response)
+                ],
                 "step_count": step_count + 1,
             },
         )
 
+    # ------------------------------------------------
+    # Delegate to next agent
+    # ------------------------------------------------
     return Command(
         goto=next_agent,
         update={
-            "messages": [AIMessage(content=f"[{agent_name} → {next_agent}]\nReason: {routing_decision.reasoning}")],
+            "messages": [
+                AIMessage(
+                    content=(
+                        f"[{agent_name} → {next_agent}]\n"
+                        f"Reason: {routing_decision.reasoning}"
+                    )
+                )
+            ],
             "step_count": step_count + 1,
         },
     )
+
+
 
 def symbolic_reasoning_agent_node(state: AgentState):
     return autonomous_agent_node(state, "symbolic_reasoning_agent")

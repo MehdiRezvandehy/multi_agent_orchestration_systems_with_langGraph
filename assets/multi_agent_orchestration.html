@@ -7613,7 +7613,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1>Table of Contents<span class="tocSkip"></span></h1>
-<div class="toc"><ul class="toc-item"><li><span><a data-toc-modified-id="Multi-agent-Systems-(Architectures)-1" href="#Multi-agent-Systems-(Architectures)"><span class="toc-item-num">1  </span>Multi-agent Systems (Architectures)</a></span></li><li><span><a data-toc-modified-id="Create-Agent-Tools-2" href="#Create-Agent-Tools"><span class="toc-item-num">2  </span>Create Agent Tools</a></span></li><li><span><a data-toc-modified-id="Any-to-Any-Multi-Agent-Networks-3" href="#Any-to-Any-Multi-Agent-Networks"><span class="toc-item-num">3  </span>Any-to-Any Multi-Agent Networks</a></span></li><li><span><a data-toc-modified-id="Supervisor-Multi-Agents-4" href="#Supervisor-Multi-Agents"><span class="toc-item-num">4  </span>Supervisor Multi-Agents</a></span></li><li><span><a data-toc-modified-id="Supervisor-Tool-Calling-Multi-Agents-5" href="#Supervisor-Tool-Calling-Multi-Agents"><span class="toc-item-num">5  </span>Supervisor Tool Calling Multi-Agents</a></span></li></ul></div>
+<div class="toc"><ul class="toc-item"><li><span><a data-toc-modified-id="Multi-agent-Systems-(Architectures)-1" href="#Multi-agent-Systems-(Architectures)"><span class="toc-item-num">1  </span>Multi-agent Systems (Architectures)</a></span></li><li><span><a data-toc-modified-id="Create-Agent-Tools-2" href="#Create-Agent-Tools"><span class="toc-item-num">2  </span>Create Agent Tools</a></span></li><li><span><a data-toc-modified-id="Any-to-Any-Multi-Agent-Networks-3" href="#Any-to-Any-Multi-Agent-Networks"><span class="toc-item-num">3  </span>Any-to-Any Multi-Agent Networks</a></span></li><li><span><a data-toc-modified-id="Supervisor-Multi-Agents-4" href="#Supervisor-Multi-Agents"><span class="toc-item-num">4  </span>Supervisor Multi-Agents</a></span></li><li><span><a data-toc-modified-id="Supervisor-Tool-Calling-Multi-Agents-5" href="#Supervisor-Tool-Calling-Multi-Agents"><span class="toc-item-num">5  </span>Supervisor Tool Calling Multi-Agents</a></span></li><li><span><a data-toc-modified-id="Recap-6" href="#Recap"><span class="toc-item-num">6  </span>Recap</a></span></li></ul></div>
 </div>
 </div>
 </div>
@@ -7773,36 +7773,6 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The key question is when to use each of these architectures.</p>
-<ul>
-<li>A <strong>centralized (supervisor-based) model</strong> works best for structured, enterprise workflows—such as SDR (Sales Development Representative) pipelines—where tasks are predictable, sequential, and need tight control.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<ul>
-<li>A <strong>decentralized (any-to-any) model</strong> is better suited for creative or exploratory scenarios, like collaborative research. In these cases, agents benefit from autonomy and flexibility—there’s no strict order, and they can decide how to approach the problem. For example, asking an agent to “<strong>go figure out the best way to solve this</strong>” fits well here, whereas a task like drafting an email is more straightforward and doesn’t require that level of freedom.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<ul>
-<li>The <strong>supervisor-as-tool-caller</strong> architecture sits in the middle, balancing control and flexibility by centralizing coordination while keeping sub-agents focused and efficient.</li>
-</ul>
 </div>
 </div>
 </div>
@@ -7871,29 +7841,6 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">'ignore'</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span>
-<span class="kn">from</span> <span class="nn">langchain_openai</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
-<span class="kn">from</span> <span class="nn">langgraph.types</span> <span class="kn">import</span> <span class="n">Command</span>
-<span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">MessagesState</span><span class="p">,</span> <span class="n">START</span><span class="p">,</span> <span class="n">END</span>
-<span class="kn">from</span> <span class="nn">langchain_core.tools</span> <span class="kn">import</span> <span class="n">tool</span>
-<span class="kn">from</span> <span class="nn">langchain_core.messages</span> <span class="kn">import</span> <span class="n">HumanMessage</span><span class="p">,</span> <span class="n">SystemMessage</span><span class="p">,</span> <span class="n">AIMessage</span><span class="p">,</span> <span class="n">ToolMessage</span>
-<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
-<span class="kn">from</span> <span class="nn">langgraph.prebuilt</span> <span class="kn">import</span> <span class="n">InjectedState</span><span class="p">,</span> <span class="n">create_react_agent</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">rich.console</span> <span class="kn">import</span> <span class="n">Console</span>
 <span class="kn">from</span> <span class="nn">rich.markdown</span> <span class="kn">import</span> <span class="n">Markdown</span>
 <span class="kn">import</span> <span class="nn">re</span>
@@ -7946,19 +7893,18 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">from</span> <span class="nn">langchain.tools</span> <span class="kn">import</span> <span class="n">BaseTool</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.tools</span> <span class="kn">import</span> <span class="n">BaseTool</span>
 <span class="kn">from</span> <span class="nn">serpapi</span> <span class="kn">import</span> <span class="n">GoogleSearch</span>
+<span class="kn">from</span> <span class="nn">langchain_experimental.tools.python.tool</span> <span class="kn">import</span> <span class="n">PythonREPLTool</span>
+<span class="kn">from</span> <span class="nn">langchain_core.tools</span> <span class="kn">import</span> <span class="n">tool</span>
 
 <span class="k">class</span> <span class="nc">GoogleSearchTool</span><span class="p">(</span><span class="n">BaseTool</span><span class="p">):</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Google Search"</span>
@@ -7996,7 +7942,34 @@ a.anchor-link {
                 <span class="k">continue</span>
 
         <span class="k">return</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">formatted_results</span><span class="p">)</span>
+    
+    
+<span class="c1"># Tool for google search</span>
+<span class="nd">@tool</span>
+<span class="k">def</span> <span class="nf">google_search_scrape</span><span class="p">(</span><span class="n">input_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Given a user's full query, apply google search</span>
+<span class="sd">    and answer the question using the search.</span>
+<span class="sd">    """</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"INPUT TO TOOL:"</span><span class="p">,</span> <span class="n">input_str</span><span class="p">)</span>
+    <span class="c1"># Extract URL</span>
+    <span class="n">google_content</span> <span class="o">=</span> <span class="n">GoogleSearchTool</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">input_str</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">google_content</span>    
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>None of PyTorch, TensorFlow &gt;= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+</pre>
 </div>
 </div>
 </div>
@@ -8006,10 +7979,16 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Tool for Python code</span>
+<span class="n">python_tool</span> <span class="o">=</span> <span class="n">PythonREPLTool</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Python_REPL'</span><span class="p">,</span>
+                                  <span class="n">description</span><span class="o">=</span> <span class="s1">'A Python shell. Use this to execute python commands. </span><span class="se">\</span>
+<span class="s1">                                  Input should be a valid python command. If you want to see the </span><span class="se">\</span>
+<span class="s1">                                  output of a value, you should print it out with `print(...)`.'</span><span class="p">,</span>
+                                  <span class="n">return_direct</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                                  <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8023,46 +8002,10 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">langchain_experimental.tools.python.tool</span> <span class="kn">import</span> <span class="n">PythonREPLTool</span>
-<span class="kn">from</span> <span class="nn">langchain_core.tools</span> <span class="kn">import</span> <span class="n">tool</span>
-
-<span class="c1"># Tool for Python code</span>
-<span class="n">python_tool</span> <span class="o">=</span> <span class="n">PythonREPLTool</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Python_REPL'</span><span class="p">,</span>
-                                  <span class="n">description</span><span class="o">=</span> <span class="s1">'A Python shell. Use this to execute python commands. </span><span class="se">\</span>
-<span class="s1">                                  Input should be a valid python command. If you want to see the </span><span class="se">\</span>
-<span class="s1">                                  output of a value, you should print it out with `print(...)`.'</span><span class="p">,</span>
-                                  <span class="n">return_direct</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                                  <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-    
-<span class="c1"># Tool for google search</span>
-<span class="nd">@tool</span>
-<span class="k">def</span> <span class="nf">google_search_scrape</span><span class="p">(</span><span class="n">input_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Given a user's full query, apply google search</span>
-<span class="sd">    and answer the question using the search.</span>
-<span class="sd">    """</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"INPUT TO TOOL:"</span><span class="p">,</span> <span class="n">input_str</span><span class="p">)</span>
-    <span class="c1"># Extract URL</span>
-    <span class="n">google_content</span> <span class="o">=</span> <span class="n">GoogleSearchTool</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">input_str</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">google_content</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">langchain_openai</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
 
 <span class="c1"># Model used for Any-to-Any Multi-Agent Networks</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s1">'gpt-4o-mini'</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s1">'gpt-4.1-mini'</span><span class="p">,</span><span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
 
 <span class="c1"># -------------------------------------------------------------------</span>
 <span class="c1"># 🔷 AGENT CONFIGURATION</span>
@@ -8089,19 +8032,19 @@ a.anchor-link {
         <span class="p">[</span><span class="n">google_search_scrape</span><span class="p">],</span>
         <span class="s2">"Retrieves information using Google search and answers ONLY from retrieved results."</span><span class="p">,</span>
 <span class="w">        </span><span class="sd">"""</span>
-<span class="sd">You are a STRICT retrieval-based search agent.</span>
-
-<span class="sd">DO NOT:</span>
-<span class="sd">- Write Python code</span>
-<span class="sd">- Perform calculations</span>
-<span class="sd">- Forecast values</span>
-<span class="sd">- Answer the user's full request</span>
-
-<span class="sd">Workflow:</span>
-<span class="sd">1. Read search results</span>
-<span class="sd">2. Extract relevant facts</span>
-<span class="sd">3. Return final answer strictly based on them</span>
-<span class="sd">"""</span>
+<span class="sd">        You are a STRICT retrieval-based search agent.</span>
+<span class="sd">        </span>
+<span class="sd">        DO NOT:</span>
+<span class="sd">        - Write Python code</span>
+<span class="sd">        - Perform calculations</span>
+<span class="sd">        - Forecast values</span>
+<span class="sd">        - Answer the user's full request</span>
+<span class="sd">        </span>
+<span class="sd">        Workflow:</span>
+<span class="sd">        1. Read search results</span>
+<span class="sd">        2. Extract relevant facts</span>
+<span class="sd">        3. Return final answer strictly based on them</span>
+<span class="sd">        """</span>
     <span class="p">),</span>
 
     <span class="c1"># ============================================================</span>
@@ -8145,28 +8088,23 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">TypedDict</span><span class="p">,</span> <span class="n">Annotated</span>
-
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
-
-<span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">START</span><span class="p">,</span> <span class="n">END</span>
 <span class="kn">from</span> <span class="nn">langgraph.graph.message</span> <span class="kn">import</span> <span class="n">add_messages</span>
-<span class="kn">from</span> <span class="nn">langgraph.types</span> <span class="kn">import</span> <span class="n">Command</span>
-
-<span class="kn">from</span> <span class="nn">langchain_core.messages</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">HumanMessage</span><span class="p">,</span>
-    <span class="n">AIMessage</span><span class="p">,</span>
-    <span class="n">SystemMessage</span><span class="p">,</span>
-<span class="p">)</span>
-
+<span class="kn">from</span> <span class="nn">langgraph.types</span> <span class="kn">import</span> <span class="n">Command</span> <span class="c1"># decides next node (goto=...)/updates shared state (update={...})</span>
+<span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">MessagesState</span><span class="p">,</span> <span class="n">START</span><span class="p">,</span> <span class="n">END</span>
+<span class="kn">from</span> <span class="nn">langchain_core.messages</span> <span class="kn">import</span> <span class="p">(</span><span class="n">HumanMessage</span><span class="p">,</span> <span class="n">AIMessage</span><span class="p">,</span> 
+                                     <span class="n">SystemMessage</span><span class="p">,</span> <span class="n">ToolMessage</span><span class="p">)</span> <span class="c1"># General message system</span>
+<span class="c1">#ReAct agent = Reason + Act loop</span>
 <span class="kn">from</span> <span class="nn">langgraph.prebuilt</span> <span class="kn">import</span> <span class="n">create_react_agent</span>
 
 
 <span class="c1"># ============================================================</span>
-<span class="c1"># STATE</span>
+<span class="c1"># STATE: shared memory of the whole system</span>
+<span class="c1"># The global state shared across all agents.</span>
 <span class="c1"># ============================================================</span>
 
 <span class="k">class</span> <span class="nc">AgentState</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
@@ -8176,6 +8114,7 @@ a.anchor-link {
 
 <span class="c1"># ============================================================</span>
 <span class="c1"># ROUTING SCHEMA</span>
+<span class="c1"># LLM decision output format: the structured output the LLM must produce.</span>
 <span class="c1"># ============================================================</span>
 
 <span class="k">class</span> <span class="nc">AgentRoutingDecision</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -8202,7 +8141,10 @@ a.anchor-link {
 <span class="c1"># CORE AGENT NODE</span>
 <span class="c1"># ============================================================</span>
 
-<span class="k">def</span> <span class="nf">autonomous_agent_node</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">,</span> <span class="n">agent_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">autonomous_agent_node</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span>  <span class="c1"># Shared memory</span>
+                          <span class="p">,</span> <span class="n">agent_name</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># Which agent is currently acting</span>
+                         <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Command</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">"symbolic_reasoning_agent"</span><span class="p">,</span> 
+                              <span class="s2">"google_search_agent"</span><span class="p">,</span> <span class="s2">"python_agent"</span><span class="p">,</span> <span class="n">END</span><span class="p">]]:</span> <span class="c1"># The output is a command</span>
 
     <span class="n">step_count</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"step_count"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
@@ -8250,45 +8192,72 @@ a.anchor-link {
 
     <span class="c1"># ------------------------------------------------</span>
     <span class="c1"># Structured routing model</span>
+    <span class="c1"># Force the LLM to output: {"reasoning": "...", "next_agent": "..." }</span>
     <span class="c1"># ------------------------------------------------</span>
     <span class="n">routing_model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">with_structured_output</span><span class="p">(</span>
         <span class="n">AgentRoutingDecision</span>
     <span class="p">)</span>
 
     <span class="n">routing_prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""</span>
-<span class="s2">You are </span><span class="si">{</span><span class="n">agent_name</span><span class="si">}</span><span class="s2"> operating in a fully decentralized multi-agent system.</span>
-
-<span class="s2">You have full autonomy and access to the complete conversation history shared across all agents.</span>
-
-<span class="s2">Your task is to decide the next step in the workflow.</span>
-
-<span class="s2">## Decision Process</span>
-
-<span class="s2">Choose exactly ONE action:</span>
-
-<span class="s2">### Continue solving</span>
-<span class="s2">Select the best next agent:</span>
-
-<span class="s2">- symbolic_reasoning_agent</span>
-<span class="s2">- google_search_agent</span>
-<span class="s2">- python_agent</span>
-
-<span class="s2">### Finish the task</span>
-<span class="s2">If the task is complete:</span>
-
-<span class="s2">next_agent = "END"</span>
-
-<span class="s2">and provide:</span>
-<span class="s2">final_response = complete answer to the user</span>
-
-<span class="s2">## Rules</span>
-
-<span class="s2">- Never output null for next_agent.</span>
-<span class="s2">- Only select ONE next agent.</span>
-<span class="s2">- No supervisor exists.</span>
-<span class="s2">- Any agent may delegate to any other agent.</span>
-<span class="s2">- Avoid repeating completed work.</span>
-<span class="s2">"""</span>
+<span class="s2">    You are </span><span class="si">{</span><span class="n">agent_name</span><span class="si">}</span><span class="s2"> operating in a fully decentralized multi-agent network.</span>
+<span class="s2">    </span>
+<span class="s2">    You have access to the complete shared conversation history and can independently decide </span>
+<span class="s2">    the next step required to solve the user's request.</span>
+<span class="s2">    </span>
+<span class="s2">    Your objective is to either:</span>
+<span class="s2">    1. Complete the task if you have sufficient information and capability.</span>
+<span class="s2">    2. Delegate the task to the most appropriate agent if additional work is required.</span>
+<span class="s2">    </span>
+<span class="s2">    ## Available Agents</span>
+<span class="s2">    </span>
+<span class="s2">    - symbolic_reasoning_agent:</span>
+<span class="s2">      Planning, decomposition, logical reasoning.</span>
+<span class="s2">    </span>
+<span class="s2">    - google_search_agent:</span>
+<span class="s2">      Search the web and retrieve current information.</span>
+<span class="s2">    </span>
+<span class="s2">    - python_agent:</span>
+<span class="s2">      Execute Python code, perform calculations,</span>
+<span class="s2">      data analysis, and visualization.</span>
+<span class="s2">    </span>
+<span class="s2">    ## Decision Process</span>
+<span class="s2">    </span>
+<span class="s2">    Choose exactly ONE action:</span>
+<span class="s2">    </span>
+<span class="s2">    ### Option 1: Continue Solving</span>
+<span class="s2">    </span>
+<span class="s2">    If more work is required, select the single best agent to perform the next step:</span>
+<span class="s2">    </span>
+<span class="s2">    next_agent = "&lt;agent_name&gt;"</span>
+<span class="s2">    </span>
+<span class="s2">    Provide a brief explanation of why this agent is best suited for the next action.</span>
+<span class="s2">    </span>
+<span class="s2">    ### Option 2: Finish the Task</span>
+<span class="s2">    </span>
+<span class="s2">    If the user's request has been fully resolved:</span>
+<span class="s2">    </span>
+<span class="s2">    next_agent = "END"</span>
+<span class="s2">    </span>
+<span class="s2">    Provide:</span>
+<span class="s2">    </span>
+<span class="s2">    final_response = "&lt;complete answer for the user&gt;"</span>
+<span class="s2">    </span>
+<span class="s2">    ## Delegation Guidelines</span>
+<span class="s2">    </span>
+<span class="s2">    - Delegate only if another agent can make better progress.</span>
+<span class="s2">    - Choose the agent best suited for the remaining work.</span>
+<span class="s2">    - Avoid unnecessary handoffs and repeated work.</span>
+<span class="s2">    - Complete the task yourself whenever possible.</span>
+<span class="s2">    </span>
+<span class="s2">    ## Rules</span>
+<span class="s2">    </span>
+<span class="s2">    - Always provide a valid `next_agent`.</span>
+<span class="s2">    - Select exactly one agent or `END`.</span>
+<span class="s2">    - Never use `null`.</span>
+<span class="s2">    - No supervisor exists.</span>
+<span class="s2">    - Any agent may delegate to any other agent.    </span>
+<span class="s2">    </span>
+<span class="s2">    """</span>
 
     <span class="c1"># ------------------------------------------------</span>
     <span class="c1"># Get routing decision</span>
@@ -8357,7 +8326,7 @@ a.anchor-link {
 
 
 <span class="c1"># ============================================================</span>
-<span class="c1"># WRAPPERS</span>
+<span class="c1"># WRAPPER FUNCTIONS (agent adapters)</span>
 <span class="c1"># ============================================================</span>
 
 <span class="k">def</span> <span class="nf">symbolic_reasoning_agent_node</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">):</span>
@@ -8382,7 +8351,7 @@ a.anchor-link {
 
 
 <span class="c1"># ============================================================</span>
-<span class="c1"># GRAPH</span>
+<span class="c1"># GRAPH CREATION</span>
 <span class="c1"># ============================================================</span>
 
 <span class="n">builder</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">AgentState</span><span class="p">)</span>
@@ -8405,7 +8374,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
@@ -8436,10 +8405,11 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">"""Write Python code that prints any_to_any_network in reverse order (e.g., krowten_yna_ot_yna). Provide only the code."""</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">"""Write Python code that prints any_to_any_network in reverse order (e.g., krowten_yna_ot_yna). </span>
+<span class="s2">Provide only the code."""</span>
 </pre></div>
 </div>
 </div>
@@ -8450,7 +8420,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">any_to_any_network</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span>
@@ -8468,34 +8438,24 @@ a.anchor-link {
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">                                        <span style="font-weight: bold; text-decoration: underline">🤖 Agent: symbolic_reasoning_agent</span>                                         
-
-💬 <span style="font-weight: bold">Response:</span> [symbolic_reasoning_agent → python_agent] Reason: The user is requesting Python code to print a       
-specific string in reverse order. Since the task is straightforward and requires code automation, the next logical 
-choice is to call the python_agent to generate the required Python code for reversing a string.                    
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>Python REPL can execute arbitrary code. Use with caution.
+<pre>C:\Users\mrezv\AppData\Local\Temp\ipykernel_25508\1118361222.py:82: LangGraphDeprecatedSinceV10: create_react_agent has been moved to `langchain.agents`. Please update your import to `from langchain.agents import create_agent`. Deprecated in LangGraph V1.0 to be removed in V2.0.
+  react_agent = create_react_agent(
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre><span class="ansi-green-intense-fg ansi-bold">content='krowten_yna_ot_yna\n' name='Python_REPL' tool_call_id='call_LSR803R18zNa2j99QyADxphI'</span></pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">                                              <span style="font-weight: bold; text-decoration: underline">🤖 Agent: python_agent</span>                                               
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                                       <span style="font-weight: bold">🤖 Agent: symbolic_reasoning_agent</span>                                        ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-💬 <span style="font-weight: bold">Response:</span> print('any_to_any_network'[::-1])                                                                     
+💬 <span style="font-weight: bold">Response:</span> ```python print("any_to_any_network"[::-1])                                                           
+
+<span style="background-color: #272822">                                                                                                                   </span>
+<span style="background-color: #272822">                                                                                                                   </span>
+<span style="background-color: #272822">                                                                                                                   </span>
 </pre>
 </div>
 </div>
@@ -8516,7 +8476,7 @@ choice is to call the python_agent to generate the required Python code for reve
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">"""Use the online real estate market data, find the average residential property price in Calgary for May 2026. </span>
@@ -8532,7 +8492,7 @@ choice is to call the python_agent to generate the required Python code for reve
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">any_to_any_network</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span>
@@ -8550,70 +8510,76 @@ choice is to call the python_agent to generate the required Python code for reve
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>C:\Users\mrezv\AppData\Local\Temp\ipykernel_25508\1118361222.py:82: LangGraphDeprecatedSinceV10: create_react_agent has been moved to `langchain.agents`. Please update your import to `from langchain.agents import create_agent`. Deprecated in LangGraph V1.0 to be removed in V2.0.
+  react_agent = create_react_agent(
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">                                        <span style="font-weight: bold; text-decoration: underline">🤖 Agent: symbolic_reasoning_agent</span>                                         
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                                       <span style="font-weight: bold">🤖 Agent: symbolic_reasoning_agent</span>                                        ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-💬 <span style="font-weight: bold">Response:</span> [symbolic_reasoning_agent → google_search_agent] Reason: I have provided an analysis of how to        
-determine potential trends in the Calgary housing market for 2026 and factors that might affect prices. However, I 
-am not able to access or provide real-time data required for specific average prices nor the actual market         
-conditions. The next logical step is to pursue real-time data from an online source, which the google_search_agent 
-could handle effectively.                                                                                          
+💬 <span style="font-weight: bold">Response:</span> [symbolic_reasoning_agent → google_search_agent] Reason: The user requests specific future real estate
+market data for Calgary in May 2026 and an analysis of price trends for Summer 2026, including citing sources.     
+Since this data is not available in my current knowledge base and requires up-to-date or forecasted market         
+information, the best next step is to use the google_search_agent to retrieve the latest real estate market data,  
+forecasts, and expert analyses relevant to Calgary for the requested timeframe. This will enable a data-driven and 
+sourced response.                                                                                                  
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>INPUT TO TOOL: average residential property price in Calgary May 2026
-INPUT TO TOOL: Calgary housing market trends Summer 2026 analysis
+<pre>INPUT TO TOOL: average residential property price in Calgary May 2026 forecast
+INPUT TO TOOL: Calgary housing market trend summer 2026 factors
+INPUT TO TOOL: Calgary average residential property price May 2026
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">                                           <span style="font-weight: bold; text-decoration: underline">🤖 Agent: google_search_agent</span>                                           
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                                          <span style="font-weight: bold">🤖 Agent: google_search_agent</span>                                          ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-💬 <span style="font-weight: bold">Response:</span> The average residential property price in Calgary for May 2026 was $665,695, reflecting a 2.5%        
-increase compared to May 2025. This indicates a gradual upward trend in prices, although there are signs that the  
-market is shifting toward a more balanced state.                                                                   
+💬 <span style="font-weight: bold">Response:</span> The average residential property price in Calgary for May 2026 is approximately $665,695, showing a   
+2.5% increase compared to May 2025 and a 2.1% increase from April 2026 (source: wowa.ca Calgary Housing Market     
+Report, Jun 2, 2026).                                                                                              
 
-<span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Analysis of Summer 2026 Housing Prices</span>                                                                             
+For Summer 2026, forecasts suggest a slight price decline for some property types, such as a 3.5% drop for         
+apartments and 1.9% for row homes, mainly due to a high supply hitting the market (source: Reddit discussion on    
+CREB 2026 forecast). However, there is also an expectation of a slow mid-year rebound in home prices assuming      
+favorable economic conditions (source: truenorthmortgage.ca housing market forecast).                              
 
-For the Summer of 2026, housing prices may face pressure to stabilize or potentially decline due to several key    
-factors:                                                                                                           
+Key factors driving these trends include:                                                                          
 
-<span style="color: #008080; text-decoration-color: #008080"> 1 </span><span style="font-weight: bold">Balanced Market Conditions</span>: Currently classified as balanced, a stable supply of homes can prevent significant  
-<span style="color: #008080; text-decoration-color: #008080">   </span>price spikes. Inventory levels are adequate, allowing buyers to have options.                                   
-<span style="color: #008080; text-decoration-color: #008080"> 2 </span><span style="font-weight: bold">Economic Factors</span>: Lower migration rates and stable employment are likely to sustain demand without pushing      
-<span style="color: #008080; text-decoration-color: #008080">   </span>prices upward significantly. If economic conditions remain stable, this could mean steady demand without        
-<span style="color: #008080; text-decoration-color: #008080">   </span>dramatic price increases.                                                                                       
-<span style="color: #008080; text-decoration-color: #008080"> 3 </span><span style="font-weight: bold">Interest Rates</span>: If interest rates are maintained at current levels, this will keep borrowing costs steady,      
-<span style="color: #008080; text-decoration-color: #008080">   </span>potentially stabilizing buyer demand but also reducing purchasing power for significant increases in property   
-<span style="color: #008080; text-decoration-color: #008080">   </span>prices.                                                                                                         
+<span style="color: #808000; text-decoration-color: #808000; font-weight: bold"> • </span>Increased housing supply putting downward pressure on prices.                                                   
+<span style="color: #808000; text-decoration-color: #808000; font-weight: bold"> • </span>Economic growth in Calgary expected to improve, with real GDP growth rising from 1.4% in 2025 to 2.5% in 2026,  
+<span style="color: #808000; text-decoration-color: #808000; font-weight: bold">   </span>which could support demand (source: PwC Canadian real estate markets to watch 2026).                            
+<span style="color: #808000; text-decoration-color: #808000; font-weight: bold"> • </span>Market sentiment expecting a generally flat to slightly declining market with potential for stabilization or    
+<span style="color: #808000; text-decoration-color: #808000; font-weight: bold">   </span>rebound mid-year.                                                                                               
 
-<span style="color: #800080; text-decoration-color: #800080; font-weight: bold">Conclusion</span>                                                                                                         
-
-While the average price has increased slightly, the indicators suggest that unless there is a considerable shift in
-economic conditions or buyer sentiment, housing prices in Calgary during Summer 2026 are likely to remain stable or
-face a downward trend.                                                                                             
+In summary, while May 2026 shows a moderate price increase year-over-year, the summer months may see prices        
+stabilize or slightly decline due to supply factors, with economic growth potentially supporting a rebound later in
+the year.                                                                                                          
 
 Sources:                                                                                                           
 
-<span style="font-weight: bold"> • </span><a href="https://wowa.ca/calgary-housing-market" target="_blank"><span style="color: #000080; text-decoration-color: #000080; text-decoration: underline">Calgary Housing Market Report</span></a>                                                                                   
-<span style="font-weight: bold"> • </span><a href="https://www.creb.com/News/Media_Releases/2026/January/forecast_2026/" target="_blank"><span style="color: #000080; text-decoration-color: #000080; text-decoration: underline">CREB® Forecast 2026</span></a>                                                                                             
+<span style="color: #808000; text-decoration-color: #808000; font-weight: bold"> • </span>Calgary Housing Market Report, May 2026: https://wowa.ca/calgary-housing-market                                 
+<span style="color: #808000; text-decoration-color: #808000; font-weight: bold"> • </span>CREB 2026 Forecast discussion:                                                                                  
+<span style="color: #808000; text-decoration-color: #808000; font-weight: bold">   </span>https://www.reddit.com/r/RealEstateCanada/comments/1qxnx5y/creb_just_dropped_the_2026_forecast_here_is_the/     
+<span style="color: #808000; text-decoration-color: #808000; font-weight: bold"> • </span>Housing Market Forecast 2026-2029: https://www.truenorthmortgage.ca/blog/housing-market-forecast                
+<span style="color: #808000; text-decoration-color: #808000; font-weight: bold"> • </span>PwC Canadian real estate markets to watch 2026:                                                                 
+<span style="color: #808000; text-decoration-color: #808000; font-weight: bold">   </span>https://www.pwc.com/us/en/industries/financial-services/asset-wealth-management/real-estate/emerging-trends-in-r
+<span style="color: #808000; text-decoration-color: #808000; font-weight: bold">   </span>eal-estate-pwc-uli/canada/canada-markets-to-watch.html                                                          
 </pre>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 </div>
 </div>
 </div>
@@ -8646,7 +8612,7 @@ Sources:
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Unlike an any-to-any network—where each agent has full autonomy to pass the entire conversation history to any other agent at any time—a Supervisor Network introduces a centralized supervisor agent that orchestrates and <strong>coordinates all interactions among sub-agents</strong>. In this architecture, the supervisor is responsible for task delegation, routing decisions, and overall workflow management, while sub-agents focus exclusively on executing the tasks assigned to them.</p>
-<p>Because routing decisions are critical to system performance, the supervisor should be powered by a stronger model; incorrect routing can significantly degrade the overall workflow. In contrast, sub-agents typically use lightweight models to perform execution tasks efficiently, reducing both cost and latency.</p>
+<p>Because routing decisions are critical to system performance, the supervisor should be powered by a <strong>stronger model</strong>; incorrect routing can significantly degrade the overall workflow. In contrast, sub-agents typically use <strong>lightweight models</strong> to perform execution tasks efficiently, reducing both cost and latency.</p>
 <p>Below is a LangGraph implementation of a Supervisor Network architecture.</p>
 </div>
 </div>
@@ -8656,7 +8622,7 @@ Sources:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># -------------------------------------------------------------------</span>
@@ -8715,21 +8681,7 @@ Sources:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># -------------------------------------------------------------------</span>
@@ -8755,8 +8707,7 @@ Sources:
         <span class="p">]</span>
 
         <span class="c1"># Final answer to user when workflow is complete</span>
-        <span class="n">final_response</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>      
-            
+        <span class="n">final_response</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="c1"># Wrap LLM to return structured output instead of free text</span>
     <span class="n">structured_supervisor</span> <span class="o">=</span> <span class="n">supervisor_model</span><span class="o">.</span><span class="n">with_structured_output</span><span class="p">(</span><span class="n">SupervisorResponse</span><span class="p">)</span>
@@ -8775,12 +8726,13 @@ Sources:
     <span class="c1"># Otherwise continue routing</span>
     <span class="k">return</span> <span class="n">Command</span><span class="p">(</span>
         <span class="n">goto</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">next_agent</span><span class="p">,</span>
-        <span class="n">update</span><span class="o">=</span><span class="p">{</span><span class="s2">"messages"</span><span class="p">:</span> <span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">next_agent_reasoning</span><span class="p">)}</span>
+        <span class="n">update</span><span class="o">=</span><span class="p">{</span><span class="s2">"messages"</span><span class="p">:</span> <span class="n">AIMessage</span><span class="p">(</span>
+        <span class="n">content</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">next_agent_reasoning</span><span class="p">)}</span> <span class="c1"># Adding message to the state from the supervisor (reason for passing)</span>
     <span class="p">)</span>
 
 
 <span class="c1"># -------------------------------------------------------------------</span>
-<span class="c1"># 🔷 MATH AGENT NODE</span>
+<span class="c1"># 🔷 REASONING AGENT NODE</span>
 <span class="c1"># -------------------------------------------------------------------</span>
 
 <span class="c1"># Handles numerical and symbolic computations</span>
@@ -8799,7 +8751,8 @@ Sources:
     <span class="c1"># Return result and hand control back to supervisor</span>
     <span class="k">return</span> <span class="n">Command</span><span class="p">(</span>
         <span class="n">goto</span><span class="o">=</span><span class="s2">"supervisor"</span><span class="p">,</span>
-        <span class="n">update</span><span class="o">=</span><span class="p">{</span><span class="s2">"messages"</span><span class="p">:</span> <span class="n">response</span><span class="p">[</span><span class="s2">"messages"</span><span class="p">]},</span>
+        <span class="n">update</span><span class="o">=</span><span class="p">{</span><span class="s2">"messages"</span><span class="p">:</span> <span class="n">response</span><span class="p">[</span><span class="s2">"messages"</span><span class="p">]},</span> <span class="c1"># Agents message writes to the global memory</span>
+        <span class="c1"># Append everything the agent just produced into the global conversation state</span>
     <span class="p">)</span>
 
 
@@ -8873,11 +8826,10 @@ Sources:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
-<span class="k">try</span><span class="p">:</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="n">png_data</span> <span class="o">=</span> <span class="n">supervisor</span><span class="o">.</span><span class="n">get_graph</span><span class="p">()</span><span class="o">.</span><span class="n">draw_mermaid_png</span><span class="p">()</span>
     <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">png_data</span><span class="p">))</span>
 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -8904,7 +8856,7 @@ Sources:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">"""</span>
@@ -8922,7 +8874,7 @@ Sources:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">supervisor</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span>
@@ -8945,18 +8897,26 @@ Sources:
 ┃                                              <span style="font-weight: bold">🤖 Agent: supervisor</span>                                               ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-💬 <span style="font-weight: bold">Response:</span> The user requests the average residential property price in Calgary for June 2026 based on current    
-online real estate market data. Since June 2026 is in the future and current online data will not have that        
-information, the best we can do is get the most recent available average property price for Calgary right now. To  
-retrieve current market data, the google_search_agent is best suited. After retrieving the average price, the user 
-wants a Python program to store and calculate price after a 2% increase, which can be handled by the python_agent. 
+💬 <span style="font-weight: bold">Response:</span> The task requires obtaining current online real estate market data for June 2026, which is a future   
+date. Since it involves real-time or up-to-date information retrieval that is not internally stored, the           
+google_search_agent is best suited to attempt to retrieve this information first. Once the data is retrieved, the  
+python_agent can be tasked with writing the Python program. Currently, the task is not completed as the data is not
+yet obtained.                                                                                                      
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>C:\Users\mrezv\AppData\Local\Temp\ipykernel_25508\3779820586.py:80: LangGraphDeprecatedSinceV10: create_react_agent has been moved to `langchain.agents`. Please update your import to `from langchain.agents import create_agent`. Deprecated in LangGraph V1.0 to be removed in V2.0.
+  agent = create_react_agent(
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>INPUT TO TOOL: average residential property price in Calgary 2023
+<pre>INPUT TO TOOL: average residential property price in Calgary June 2026
 </pre>
 </div>
 </div>
@@ -8967,36 +8927,44 @@ wants a Python program to store and calculate price after a 2% increase, which c
 ┃                                          <span style="font-weight: bold">🤖 Agent: google_search_agent</span>                                          ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-💬 <span style="font-weight: bold">Response:</span> The user requests the average residential property price in Calgary for June 2026 based on current    
-online real estate market data. Since June 2026 is in the future and current online data will not have that        
-information, the best we can do is get the most recent available average property price for Calgary right now. To  
-retrieve current market data, the google_search_agent is best suited. After retrieving the average price, the user 
-wants a Python program to store and calculate price after a 2% increase, which can be handled by the python_agent. 
+💬 <span style="font-weight: bold">Response:</span> The task requires obtaining current online real estate market data for June 2026, which is a future   
+date. Since it involves real-time or up-to-date information retrieval that is not internally stored, the           
+google_search_agent is best suited to attempt to retrieve this information first. Once the data is retrieved, the  
+python_agent can be tasked with writing the Python program. Currently, the task is not completed as the data is not
+yet obtained.                                                                                                      
 
-🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">google_search_scrape</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'input_str': 'average residential property price in Calgary 2023'}</span>          
+🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">google_search_scrape</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'input_str': 'average residential property price in Calgary June 2026'}</span>     
 
 ⚙️ <span style="font-weight: bold">Tool Result:</span> Title: Calgary Housing Market Report: Jun. 2nd, 2026 Update Link:                                   
-https://wowa.ca/calgary-housing-market Snippet: Median Prices · Detached houses: $715,000, 2.1% lower compared to  
-last May and up 0.7% monthly. · Semi-detached houses: $575,000, down 5.3% annually and down 5.2% ...               
+https://wowa.ca/calgary-housing-market Snippet: Average Prices · Detached homes $844,352, down 0.3% year-over-year 
+and up 1.7% from April. · Semi-detached homes $658,309, down 4.1% year-over-year and down 4.7% ...                 
 
 <span style="color: #808000; text-decoration-color: #808000">───────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span>
-Title: Daily Housing Summary Link: https://www.creb.com/housing_statistics/daily_housing_summary/ Snippet: Calgary 
-Total ; Median Price, 560,000, 575,000 ; Average Price, 607,043, 628,670 ; Benchmark Price, 602,600, 588,300 ; Days
-on Market, 26, 37 ...                                                                                              
+Title: Calgary Housing Market | 2026 Home Prices Link:                                                             
+https://www.nesto.ca/real-estate/calgary-housing-market-outlook/ Snippet: According to the Calgary Real Estate     
+Board (CREB), the city's total residential benchmark price reached $570,500 in May 2026, down 3% from a ...        
 
 <span style="color: #808000; text-decoration-color: #808000">───────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span>
-Title: Calgary — Historical Average, Median and Price Percentiles ... Link:                                        
-https://www03.cmhc-schl.gc.ca/hmip-pimh/en/TableMapChart/TableMatchingCriteria?GeographyType=MetropolitanMajorArea&amp;
-GeographyId=0140&amp;CategoryLevel1=New%20Housing%20Construction&amp;CategoryLevel2=Absorbed%20Unit%20Prices%20%28%24%29&amp;Ro
-wField=TIMESERIES Snippet: Historical Average, Median and Price Percentiles for Absorbed Homeowner and Condominium 
-Units. Median Average Units 2023 January ..                                                                        
+Title: Calgary Real Estate Market Update - June 2026 Link: https://www.youtube.com/watch?v=zogqgkciLQ0 Snippet: The
+median price story sounds encouraging. From May 2023 to May 2026, Calgary's median sale price jumped from $509,000 
+to $592,500. That's ...                                                                                            
 
 <span style="color: #808000; text-decoration-color: #808000">───────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span>
-💬 <span style="font-weight: bold">Response:</span> The average residential property price in Calgary is approximately $607,043 as of the most recent data
-available.                                                                                                         
+💬 <span style="font-weight: bold">Response:</span> The average residential property price in Calgary for June 2026 is approximately $570,500 according to
+the Calgary Real Estate Board (CREB) data from May 2026, which is the closest available data point.                
 
-For the request regarding a Python program, I can't provide a program, but I can state that you would store the    
-price in a variable and apply a 2% increase for calculations in your code.                                         
+Next, I will provide a Python program that stores this price in a variable and calculates the price after a 2%     
+increase.                                                                                                          
+
+<span style="background-color: #272822">                                                                                                                   </span>
+<span style="background-color: #272822"> </span><span style="color: #959077; text-decoration-color: #959077; background-color: #272822"># Store the average residential property price in Calgary for June 2026</span><span style="background-color: #272822">                                           </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">average_price </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">570500</span><span style="background-color: #272822">                                                                                            </span>
+<span style="background-color: #272822">                                                                                                                   </span>
+<span style="background-color: #272822"> </span><span style="color: #959077; text-decoration-color: #959077; background-color: #272822"># Calculate the price after a 2% increase</span><span style="background-color: #272822">                                                                         </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">price_after_increase </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> average_price </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">*</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">1.02</span><span style="background-color: #272822">                                                                       </span>
+<span style="background-color: #272822">                                                                                                                   </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">print(</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">"Price after 2% increase:"</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">, price_after_increase)</span><span style="background-color: #272822">                                                           </span>
+<span style="background-color: #272822">                                                                                                                   </span>
 </pre>
 </div>
 </div>
@@ -9007,16 +8975,25 @@ price in a variable and apply a 2% increase for calculations in your code.
 ┃                                              <span style="font-weight: bold">🤖 Agent: supervisor</span>                                               ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-💬 <span style="font-weight: bold">Response:</span> The average property price in Calgary has been found from the search results as approximately         
-$607,043. The user also wants a Python program that stores this price and calculates the price after a 2% increase.
-I will now create this Python program as requested.                                                                
+💬 <span style="font-weight: bold">Response:</span> The average residential property price in Calgary for June 2026 has been identified from the search   
+results as $570,500, the closest and most relevant data available. The next step is to write a Python program that 
+stores this price and calculates the price after a 2% increase, so the python_agent should handle this.            
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>C:\Users\mrezv\AppData\Local\Temp\ipykernel_25508\3779820586.py:101: LangGraphDeprecatedSinceV10: create_react_agent has been moved to `langchain.agents`. Please update your import to `from langchain.agents import create_agent`. Deprecated in LangGraph V1.0 to be removed in V2.0.
+  agent = create_react_agent(
+Python REPL can execute arbitrary code. Use with caution.
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre><span class="ansi-green-intense-fg ansi-bold">content='' name='Python_REPL' tool_call_id='call_yq3FlTwTgYagMW12OpHYwoQ5'</span><span class="ansi-green-intense-fg ansi-bold">content='Average Price: $607043\nPrice after 2% increase: $619183.86\n' name='Python_REPL' tool_call_id='call_Vr6RtCrNc8MO4DRzH6DsTPRu'</span></pre>
+<pre><span class="ansi-green-intense-fg ansi-bold">content='581910.0\n' name='Python_REPL' tool_call_id='call_HD3Ubncsjmcfvw9eRMKPmD6g'</span></pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
@@ -9026,60 +9003,56 @@ I will now create this Python program as requested.
 ┃                                             <span style="font-weight: bold">🤖 Agent: python_agent</span>                                              ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-💬 <span style="font-weight: bold">Response:</span> The user requests the average residential property price in Calgary for June 2026 based on current    
-online real estate market data. Since June 2026 is in the future and current online data will not have that        
-information, the best we can do is get the most recent available average property price for Calgary right now. To  
-retrieve current market data, the google_search_agent is best suited. After retrieving the average price, the user 
-wants a Python program to store and calculate price after a 2% increase, which can be handled by the python_agent. 
+💬 <span style="font-weight: bold">Response:</span> The task requires obtaining current online real estate market data for June 2026, which is a future   
+date. Since it involves real-time or up-to-date information retrieval that is not internally stored, the           
+google_search_agent is best suited to attempt to retrieve this information first. Once the data is retrieved, the  
+python_agent can be tasked with writing the Python program. Currently, the task is not completed as the data is not
+yet obtained.                                                                                                      
 
-🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">google_search_scrape</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'input_str': 'average residential property price in Calgary 2023'}</span>          
+🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">google_search_scrape</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'input_str': 'average residential property price in Calgary June 2026'}</span>     
 
 ⚙️ <span style="font-weight: bold">Tool Result:</span> Title: Calgary Housing Market Report: Jun. 2nd, 2026 Update Link:                                   
-https://wowa.ca/calgary-housing-market Snippet: Median Prices · Detached houses: $715,000, 2.1% lower compared to  
-last May and up 0.7% monthly. · Semi-detached houses: $575,000, down 5.3% annually and down 5.2% ...               
+https://wowa.ca/calgary-housing-market Snippet: Average Prices · Detached homes $844,352, down 0.3% year-over-year 
+and up 1.7% from April. · Semi-detached homes $658,309, down 4.1% year-over-year and down 4.7% ...                 
 
 <span style="color: #808000; text-decoration-color: #808000">───────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span>
-Title: Daily Housing Summary Link: https://www.creb.com/housing_statistics/daily_housing_summary/ Snippet: Calgary 
-Total ; Median Price, 560,000, 575,000 ; Average Price, 607,043, 628,670 ; Benchmark Price, 602,600, 588,300 ; Days
-on Market, 26, 37 ...                                                                                              
+Title: Calgary Housing Market | 2026 Home Prices Link:                                                             
+https://www.nesto.ca/real-estate/calgary-housing-market-outlook/ Snippet: According to the Calgary Real Estate     
+Board (CREB), the city's total residential benchmark price reached $570,500 in May 2026, down 3% from a ...        
 
 <span style="color: #808000; text-decoration-color: #808000">───────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span>
-Title: Calgary — Historical Average, Median and Price Percentiles ... Link:                                        
-https://www03.cmhc-schl.gc.ca/hmip-pimh/en/TableMapChart/TableMatchingCriteria?GeographyType=MetropolitanMajorArea&amp;
-GeographyId=0140&amp;CategoryLevel1=New%20Housing%20Construction&amp;CategoryLevel2=Absorbed%20Unit%20Prices%20%28%24%29&amp;Ro
-wField=TIMESERIES Snippet: Historical Average, Median and Price Percentiles for Absorbed Homeowner and Condominium 
-Units. Median Average Units 2023 January ..                                                                        
+Title: Calgary Real Estate Market Update - June 2026 Link: https://www.youtube.com/watch?v=zogqgkciLQ0 Snippet: The
+median price story sounds encouraging. From May 2023 to May 2026, Calgary's median sale price jumped from $509,000 
+to $592,500. That's ...                                                                                            
 
 <span style="color: #808000; text-decoration-color: #808000">───────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span>
-💬 <span style="font-weight: bold">Response:</span> The average residential property price in Calgary is approximately $607,043 as of the most recent data
-available.                                                                                                         
+💬 <span style="font-weight: bold">Response:</span> The average residential property price in Calgary for June 2026 is approximately $570,500 according to
+the Calgary Real Estate Board (CREB) data from May 2026, which is the closest available data point.                
 
-For the request regarding a Python program, I can't provide a program, but I can state that you would store the    
-price in a variable and apply a 2% increase for calculations in your code.                                         
-
-💬 <span style="font-weight: bold">Response:</span> The average property price in Calgary has been found from the search results as approximately         
-$607,043. The user also wants a Python program that stores this price and calculates the price after a 2% increase.
-I will now create this Python program as requested.                                                                
-
-🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">Python_REPL</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'query': '# Define the average property price\naverage_price = 607043\n\n# Calculate </span>
-<span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">the new price after a 2% increase\nprice_after_increase = average_price * 1.02\n\n# Print the </span>                     
-<span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">results\naverage_price, price_after_increase'}</span>                                                                     
-
-⚙️ <span style="font-weight: bold">Tool Result:</span>                                                                                                     
-
-🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">Python_REPL</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'query': "# Define the average property price\naverage_price = 607043\n\n# Calculate </span>
-<span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">the new price after a 2% increase\nprice_after_increase = average_price * 1.02\n\n# Print the </span>                     
-<span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">results\nprint(f'Average Price: ${average_price}')\nprint(f'Price after 2% increase: ${price_after_increase}')"}</span>   
-
-⚙️ <span style="font-weight: bold">Tool Result:</span> Average Price: $607043 Price after 2% increase: $619183.86                                          
-
-💬 <span style="font-weight: bold">Response:</span> Here is the output from the Python program:                                                           
-
-<span style="color: #808000; text-decoration-color: #808000; font-weight: bold"> • </span>Average Price: $607,043                                                                                         
-<span style="color: #808000; text-decoration-color: #808000; font-weight: bold"> • </span>Price after 2% increase: $619,183.86                                                                            
-
-This program successfully calculates the average property price and the increased price after applying a 2%        
+Next, I will provide a Python program that stores this price in a variable and calculates the price after a 2%     
 increase.                                                                                                          
+
+<span style="background-color: #272822">                                                                                                                   </span>
+<span style="background-color: #272822"> </span><span style="color: #959077; text-decoration-color: #959077; background-color: #272822"># Store the average residential property price in Calgary for June 2026</span><span style="background-color: #272822">                                           </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">average_price </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">570500</span><span style="background-color: #272822">                                                                                            </span>
+<span style="background-color: #272822">                                                                                                                   </span>
+<span style="background-color: #272822"> </span><span style="color: #959077; text-decoration-color: #959077; background-color: #272822"># Calculate the price after a 2% increase</span><span style="background-color: #272822">                                                                         </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">price_after_increase </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> average_price </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">*</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">1.02</span><span style="background-color: #272822">                                                                       </span>
+<span style="background-color: #272822">                                                                                                                   </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">print(</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">"Price after 2% increase:"</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">, price_after_increase)</span><span style="background-color: #272822">                                                           </span>
+<span style="background-color: #272822">                                                                                                                   </span>
+
+💬 <span style="font-weight: bold">Response:</span> The average residential property price in Calgary for June 2026 has been identified from the search   
+results as $570,500, the closest and most relevant data available. The next step is to write a Python program that 
+stores this price and calculates the price after a 2% increase, so the python_agent should handle this.            
+
+🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">Python_REPL</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'query': 'average_price = 570500\nprice_after_increase = average_price * </span>            
+<span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">1.02\nprint(price_after_increase)'}</span>                                                                                
+
+⚙️ <span style="font-weight: bold">Tool Result:</span> 581910.0                                                                                            
+
+💬 <span style="font-weight: bold">Response:</span> The Python program calculates that the price after a 2% increase on the average residential property  
+price of $570,500 in Calgary for June 2026 is $581,910.                                                            
 </pre>
 </div>
 </div>
@@ -9090,22 +9063,18 @@ increase.
 ┃                                              <span style="font-weight: bold">🤖 Agent: supervisor</span>                                               ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-💬 <span style="font-weight: bold">Response:</span> The average residential property price in Calgary based on the most recent available data is          
-approximately $607,043. Here is the Python code that stores this price and calculates the price after a 2%         
-increase:                                                                                                          
+💬 <span style="font-weight: bold">Response:</span> The average residential property price in Calgary for June 2026 is approximately $570,500. After a 2% 
+increase, the price would be $581,910. The Python program to perform this calculation is:                          
 
 <span style="background-color: #272822">                                                                                                                   </span>
-<span style="background-color: #272822"> </span><span style="color: #959077; text-decoration-color: #959077; background-color: #272822"># Define the average property price</span><span style="background-color: #272822">                                                                               </span>
-<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">average_price </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">607043</span><span style="background-color: #272822">                                                                                            </span>
+<span style="background-color: #272822"> </span><span style="color: #959077; text-decoration-color: #959077; background-color: #272822"># Store the average residential property price in Calgary for June 2026</span><span style="background-color: #272822">                                           </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">average_price </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">570500</span><span style="background-color: #272822">                                                                                            </span>
 <span style="background-color: #272822">                                                                                                                   </span>
-<span style="background-color: #272822"> </span><span style="color: #959077; text-decoration-color: #959077; background-color: #272822"># Calculate the new price after a 2% increase</span><span style="background-color: #272822">                                                                     </span>
+<span style="background-color: #272822"> </span><span style="color: #959077; text-decoration-color: #959077; background-color: #272822"># Calculate the price after a 2% increase</span><span style="background-color: #272822">                                                                         </span>
 <span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">price_after_increase </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> average_price </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">*</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">1.02</span><span style="background-color: #272822">                                                                       </span>
 <span style="background-color: #272822">                                                                                                                   </span>
-<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">print(</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">f'Average Price: ${</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">average_price</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">}'</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">)</span><span style="background-color: #272822">                                                                         </span>
-<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">print(</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">f'Price after 2% increase: ${</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">price_after_increase</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">}'</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">)</span><span style="background-color: #272822">                                                        </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">print(</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">"Price after 2% increase:"</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">, price_after_increase)</span><span style="background-color: #272822">                                                           </span>
 <span style="background-color: #272822">                                                                                                                   </span>
-
-Running this code yields: Average Price: $607,043 Price after 2% increase: $619,183.86                             
 </pre>
 </div>
 </div>
@@ -9126,7 +9095,7 @@ Running this code yields: Average Price: $607,043 Price after 2% increase: $619,
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
@@ -9135,7 +9104,8 @@ Running this code yields: Average Price: $607,043 Price after 2% increase: $619,
 
 <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""</span>
 <span class="s2">Retrieve the maximum daytime temperature in Calgary for May in Fahrenheit using online data.</span>
-<span class="s2">Then multiply the value by 234,567,821. Finally write a Python code that prints the result in the format:</span>
+<span class="s2">Then multiply the value by 234,567,821. Finally write a Python code that prints the result in the format: show </span>
+<span class="s2">the python code for:</span>
 <span class="s2">"Maximum daytime temperature in Calgary for May in Fahrenheit multiplied by 234,567,821 is ..."</span>
 <span class="s2">"""</span>
 
@@ -9159,10 +9129,17 @@ Running this code yields: Average Price: $607,043 Price after 2% increase: $619,
 ┃                                              <span style="font-weight: bold">🤖 Agent: supervisor</span>                                               ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-💬 <span style="font-weight: bold">Response:</span> To retrieve the maximum daytime temperature in Calgary for May in Fahrenheit, I need up-to-date       
-weather or climate data from the web. After obtaining this value, I will multiply it by 234,567,821 and write the  
-requested Python code. Therefore, the next step is to use the google_search_agent to find the maximum daytime      
-temperature.                                                                                                       
+💬 <span style="font-weight: bold">Response:</span> To find the maximum daytime temperature in Calgary for May, I need up-to-date weather data which      
+requires real-time information from the web. After retrieving the temperature, I will multiply it by 234,567,821.  
+Finally, I will generate the Python code that prints the resulting value in the required format.                   
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>C:\Users\mrezv\AppData\Local\Temp\ipykernel_25508\3779820586.py:80: LangGraphDeprecatedSinceV10: create_react_agent has been moved to `langchain.agents`. Please update your import to `from langchain.agents import create_agent`. Deprecated in LangGraph V1.0 to be removed in V2.0.
+  agent = create_react_agent(
 </pre>
 </div>
 </div>
@@ -9180,17 +9157,16 @@ temperature.
 ┃                                          <span style="font-weight: bold">🤖 Agent: google_search_agent</span>                                          ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-💬 <span style="font-weight: bold">Response:</span> To retrieve the maximum daytime temperature in Calgary for May in Fahrenheit, I need up-to-date       
-weather or climate data from the web. After obtaining this value, I will multiply it by 234,567,821 and write the  
-requested Python code. Therefore, the next step is to use the google_search_agent to find the maximum daytime      
-temperature.                                                                                                       
+💬 <span style="font-weight: bold">Response:</span> To find the maximum daytime temperature in Calgary for May, I need up-to-date weather data which      
+requires real-time information from the web. After retrieving the temperature, I will multiply it by 234,567,821.  
+Finally, I will generate the Python code that prints the resulting value in the required format.                   
 
 🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">google_search_scrape</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'input_str': 'maximum daytime temperature in Calgary for May in Fahrenheit'}</span>
 
-⚙️ <span style="font-weight: bold">Tool Result:</span> Title: Calgary May Weather, Average Temperature (Alberta, ... Link:                                 
-https://weatherspark.com/m/2349/5/Average-Weather-in-May-in-Calgary-Alberta-Canada Snippet: May weather in Calgary 
-Alberta, Canada. Daily high temperatures increase by 7°F, from 58°F to 65°F, rarely falling below 44°F or exceeding
-77°F.                                                                                                              
+⚙️ <span style="font-weight: bold">Tool Result:</span> Title: Calgary Climate, Weather By Month, Average Temperature ... Link:                             
+https://weatherspark.com/y/2349/Average-Weather-in-Calgary-Alberta-Canada-Year-Round Snippet: Calgary Temperature  
+By Month. The warm season lasts for 3.3 months, from June 6 to September 14, with an average daily high temperature
+above 66°F. The ...                                                                                                
 
 <span style="color: #808000; text-decoration-color: #808000">───────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span>
 Title: Climate of Calgary Link: https://en.wikipedia.org/wiki/Climate_of_Calgary Snippet: The record high          
@@ -9203,14 +9179,16 @@ https://avionero.com/New-York_NYC-Calgary_YYC/weather/may Snippet: May weather i
 getting warmer as May arrives. The average maximum temperature goes up from +54°F to +63°F during the day.         
 
 <span style="color: #808000; text-decoration-color: #808000">───────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span>
-💬 <span style="font-weight: bold">Response:</span> The maximum daytime temperature in Calgary for May ranges from 58°F to 65°F. Thus, the highest value  
-is 65°F.                                                                                                           
+💬 <span style="font-weight: bold">Response:</span> The average maximum daytime temperature in Calgary for May is about 63°F.                             
 
-If I were to multiply this by 234,567,821, the Python code would look as follows:                                  
+Next, I will multiply 63 by 234,567,821 and then provide the Python code that prints the result in the requested   
+format. The maximum daytime temperature in Calgary for May in Fahrenheit is approximately 63°F.                    
+
+The Python code to print the result of multiplying this temperature by 234,567,821 is:                             
 
 <span style="background-color: #272822">                                                                                                                   </span>
-<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">result </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">65</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">*</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">234567821</span><span style="background-color: #272822">                                                                                           </span>
-<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">print(</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">f"Maximum daytime temperature in Calgary for May in Fahrenheit multiplied by 234,567,821 is {</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">result</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">}."</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">)</span><span style="background-color: #272822">     </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">result </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">63</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">*</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">234567821</span><span style="background-color: #272822">                                                                                           </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">print(</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">"Maximum daytime temperature in Calgary for May in Fahrenheit multiplied by 234,567,821 is"</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">, result)</span><span style="background-color: #272822">        </span>
 <span style="background-color: #272822">                                                                                                                   </span>
 </pre>
 </div>
@@ -9222,15 +9200,23 @@ If I were to multiply this by 234,567,821, the Python code would look as follows
 ┃                                              <span style="font-weight: bold">🤖 Agent: supervisor</span>                                               ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-💬 <span style="font-weight: bold">Response:</span> The maximum daytime temperature in Calgary for May is given as 65°F. I will now execute the Python    
-code to perform the multiplication and print the requested output format.                                          
+💬 <span style="font-weight: bold">Response:</span> I need to multiply the temperature 63 by 234,567,821 to get the numerical result and then provide the 
+Python code that prints this result in the requested format.                                                       
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>C:\Users\mrezv\AppData\Local\Temp\ipykernel_25508\3779820586.py:101: LangGraphDeprecatedSinceV10: create_react_agent has been moved to `langchain.agents`. Please update your import to `from langchain.agents import create_agent`. Deprecated in LangGraph V1.0 to be removed in V2.0.
+  agent = create_react_agent(
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre><span class="ansi-green-intense-fg ansi-bold">content='Maximum daytime temperature in Calgary for May in Fahrenheit multiplied by 234,567,821 is 15246908365.\n' name='Python_REPL' tool_call_id='call_PM2ThbRSnDBmpbmPVBYvrgDS'</span></pre>
+<pre><span class="ansi-green-intense-fg ansi-bold">content='' name='Python_REPL' tool_call_id='call_HmSZaheXZ1GJ4m5H40X4Z8bs'</span><span class="ansi-green-intense-fg ansi-bold">content='14777772723\n' name='Python_REPL' tool_call_id='call_TBagjSbiMTwn4OLVSycYtSFJ'</span></pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
@@ -9240,17 +9226,16 @@ code to perform the multiplication and print the requested output format.
 ┃                                             <span style="font-weight: bold">🤖 Agent: python_agent</span>                                              ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-💬 <span style="font-weight: bold">Response:</span> To retrieve the maximum daytime temperature in Calgary for May in Fahrenheit, I need up-to-date       
-weather or climate data from the web. After obtaining this value, I will multiply it by 234,567,821 and write the  
-requested Python code. Therefore, the next step is to use the google_search_agent to find the maximum daytime      
-temperature.                                                                                                       
+💬 <span style="font-weight: bold">Response:</span> To find the maximum daytime temperature in Calgary for May, I need up-to-date weather data which      
+requires real-time information from the web. After retrieving the temperature, I will multiply it by 234,567,821.  
+Finally, I will generate the Python code that prints the resulting value in the required format.                   
 
 🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">google_search_scrape</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'input_str': 'maximum daytime temperature in Calgary for May in Fahrenheit'}</span>
 
-⚙️ <span style="font-weight: bold">Tool Result:</span> Title: Calgary May Weather, Average Temperature (Alberta, ... Link:                                 
-https://weatherspark.com/m/2349/5/Average-Weather-in-May-in-Calgary-Alberta-Canada Snippet: May weather in Calgary 
-Alberta, Canada. Daily high temperatures increase by 7°F, from 58°F to 65°F, rarely falling below 44°F or exceeding
-77°F.                                                                                                              
+⚙️ <span style="font-weight: bold">Tool Result:</span> Title: Calgary Climate, Weather By Month, Average Temperature ... Link:                             
+https://weatherspark.com/y/2349/Average-Weather-in-Calgary-Alberta-Canada-Year-Round Snippet: Calgary Temperature  
+By Month. The warm season lasts for 3.3 months, from June 6 to September 14, with an average daily high temperature
+above 66°F. The ...                                                                                                
 
 <span style="color: #808000; text-decoration-color: #808000">───────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span>
 Title: Climate of Calgary Link: https://en.wikipedia.org/wiki/Climate_of_Calgary Snippet: The record high          
@@ -9263,28 +9248,44 @@ https://avionero.com/New-York_NYC-Calgary_YYC/weather/may Snippet: May weather i
 getting warmer as May arrives. The average maximum temperature goes up from +54°F to +63°F during the day.         
 
 <span style="color: #808000; text-decoration-color: #808000">───────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span>
-💬 <span style="font-weight: bold">Response:</span> The maximum daytime temperature in Calgary for May ranges from 58°F to 65°F. Thus, the highest value  
-is 65°F.                                                                                                           
+💬 <span style="font-weight: bold">Response:</span> The average maximum daytime temperature in Calgary for May is about 63°F.                             
 
-If I were to multiply this by 234,567,821, the Python code would look as follows:                                  
+Next, I will multiply 63 by 234,567,821 and then provide the Python code that prints the result in the requested   
+format. The maximum daytime temperature in Calgary for May in Fahrenheit is approximately 63°F.                    
+
+The Python code to print the result of multiplying this temperature by 234,567,821 is:                             
 
 <span style="background-color: #272822">                                                                                                                   </span>
-<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">result </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">65</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">*</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">234567821</span><span style="background-color: #272822">                                                                                           </span>
-<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">print(</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">f"Maximum daytime temperature in Calgary for May in Fahrenheit multiplied by 234,567,821 is {</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">result</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">}."</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">)</span><span style="background-color: #272822">     </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">result </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">63</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">*</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">234567821</span><span style="background-color: #272822">                                                                                           </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">print(</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">"Maximum daytime temperature in Calgary for May in Fahrenheit multiplied by 234,567,821 is"</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">, result)</span><span style="background-color: #272822">        </span>
 <span style="background-color: #272822">                                                                                                                   </span>
 
-💬 <span style="font-weight: bold">Response:</span> The maximum daytime temperature in Calgary for May is given as 65°F. I will now execute the Python    
-code to perform the multiplication and print the requested output format.                                          
+💬 <span style="font-weight: bold">Response:</span> I need to multiply the temperature 63 by 234,567,821 to get the numerical result and then provide the 
+Python code that prints this result in the requested format.                                                       
 
-🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">Python_REPL</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'query': 'result = 65 * 234567821\nprint(f"Maximum daytime temperature in Calgary for</span>
-<span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">May in Fahrenheit multiplied by 234,567,821 is {result}.")'}</span>                                                       
+🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">Python_REPL</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'query': 'temperature = 63\nmultiplier = 234567821\nresult = temperature * </span>          
+<span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">multiplier\nresult'}</span>                                                                                               
 
-⚙️ <span style="font-weight: bold">Tool Result:</span> Maximum daytime temperature in Calgary for May in Fahrenheit multiplied by 234,567,821 is           
-15246908365.                                                                                                       
+⚙️ <span style="font-weight: bold">Tool Result:</span>                                                                                                     
 
-💬 <span style="font-weight: bold">Response:</span> The result of the calculation is:                                                                     
+💬 <span style="font-weight: bold">Response:</span> The multiplication result is not shown. I will try printing the result explicitly.                    
 
-"Maximum daytime temperature in Calgary for May in Fahrenheit multiplied by 234,567,821 is 15246908365."           
+🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">Python_REPL</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'query': 'temperature = 63\nmultiplier = 234567821\nresult = temperature * </span>          
+<span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">multiplier\nprint(result)'}</span>                                                                                        
+
+⚙️ <span style="font-weight: bold">Tool Result:</span> 14777772723                                                                                         
+
+💬 <span style="font-weight: bold">Response:</span> The result of multiplying the maximum daytime temperature in Calgary for May (63°F) by 234,567,821 is 
+14,777,772,723.                                                                                                    
+
+Here is the Python code that prints the result in the requested format:                                            
+
+<span style="background-color: #272822">                                                                                                                   </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">temperature </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">63</span><span style="background-color: #272822">                                                                                                  </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">multiplier </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">234567821</span><span style="background-color: #272822">                                                                                            </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">result </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> temperature </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">*</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> multiplier</span><span style="background-color: #272822">                                                                                 </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">print(\</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">"Maximum daytime temperature in Calgary for May in Fahrenheit multiplied by 234,567,821 is</span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">\"</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">, result)</span><span style="background-color: #272822">      </span>
+<span style="background-color: #272822">                                                                                                                   </span>
 </pre>
 </div>
 </div>
@@ -9295,7 +9296,17 @@ code to perform the multiplication and print the requested output format.
 ┃                                              <span style="font-weight: bold">🤖 Agent: supervisor</span>                                               ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-💬 <span style="font-weight: bold">Response:</span> Maximum daytime temperature in Calgary for May in Fahrenheit multiplied by 234,567,821 is 15246908365.
+💬 <span style="font-weight: bold">Response:</span> The result of multiplying the maximum daytime temperature in Calgary for May (63°F) by 234,567,821 is 
+14,777,772,723.                                                                                                    
+
+Here is the Python code that prints the result in the requested format:                                            
+
+<span style="background-color: #272822">                                                                                                                   </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">temperature </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">63</span><span style="background-color: #272822">                                                                                                  </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">multiplier </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">234567821</span><span style="background-color: #272822">                                                                                            </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">result </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> temperature </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">*</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> multiplier</span><span style="background-color: #272822">                                                                                 </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">print(</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">"Maximum daytime temperature in Calgary for May in Fahrenheit multiplied by 234,567,821 is"</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">, result)</span><span style="background-color: #272822">        </span>
+<span style="background-color: #272822">                                                                                                                   </span>
 </pre>
 </div>
 </div>
@@ -9380,7 +9391,7 @@ code to perform the multiplication and print the requested output format.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">supervisor_with_tools_prompt</span> <span class="o">=</span> <span class="s2">"""</span>
@@ -9409,12 +9420,23 @@ code to perform the multiplication and print the requested output format.
 </div>
 </div>
 </div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>We replace graph nodes with tools, and the supervisor is responsible for invoking these tools as needed.</p>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Handle logical reasoning, algebraic manipulation</span>
@@ -9423,7 +9445,9 @@ code to perform the multiplication and print the requested output format.
 <span class="w">    </span><span class="sd">"""Handle logical reasoning, algebraic manipulation, derivations, and problem decomposition."""</span>
     
     <span class="c1"># Create a ReAct-style agent using configured model, tools, and prompt</span>
-    <span class="n">agent</span> <span class="o">=</span> <span class="n">create_react_agent</span><span class="p">(</span><span class="n">agents</span><span class="p">[</span><span class="s1">'symbolic_reasoning_agent'</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">agents</span><span class="p">[</span><span class="s1">'symbolic_reasoning_agent'</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">prompt</span><span class="o">=</span><span class="n">agents</span><span class="p">[</span><span class="s1">'symbolic_reasoning_agent'</span><span class="p">][</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">agent</span> <span class="o">=</span> <span class="n">create_react_agent</span><span class="p">(</span><span class="n">agents</span><span class="p">[</span><span class="s1">'symbolic_reasoning_agent'</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> 
+                               <span class="n">agents</span><span class="p">[</span><span class="s1">'symbolic_reasoning_agent'</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> 
+                               <span class="n">prompt</span><span class="o">=</span><span class="n">agents</span><span class="p">[</span><span class="s1">'symbolic_reasoning_agent'</span><span class="p">][</span><span class="mi">3</span><span class="p">])</span>
 
     <span class="c1"># Invoke tool</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s1">'messages'</span><span class="p">:</span> <span class="p">[</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">task</span><span class="p">)]})</span>
@@ -9435,12 +9459,15 @@ code to perform the multiplication and print the requested output format.
 <span class="k">def</span> <span class="nf">google_search_tool</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Retrieves and answers questions using up-to-date information from Google search."""</span>
     
+    <span class="c1"># react agent invoking</span>
     <span class="n">agent</span> <span class="o">=</span> <span class="n">create_react_agent</span><span class="p">(</span><span class="n">agents</span><span class="p">[</span><span class="s1">'google_search_agent'</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> 
                                <span class="n">agents</span><span class="p">[</span><span class="s1">'google_search_agent'</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> 
                                <span class="n">prompt</span><span class="o">=</span><span class="n">agents</span><span class="p">[</span><span class="s1">'google_search_agent'</span><span class="p">][</span><span class="mi">3</span><span class="p">])</span>
 
     <span class="c1"># Invoke tool</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s1">'messages'</span><span class="p">:</span> <span class="p">[</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">task</span><span class="p">)]})</span>
+    
+    <span class="c1"># Retrun the last message</span>
     <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s1">'messages'</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">content</span>
 
 
@@ -9466,13 +9493,10 @@ code to perform the multiplication and print the requested output format.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">tools</span> <span class="o">=</span> <span class="p">[</span><span class="n">symbolic_reasoning_tool</span><span class="p">,</span> <span class="n">google_search_tool</span><span class="p">,</span> <span class="n">python_tool</span><span class="p">]</span>
-<span class="c1"># the simplest way to build a supervisor w/ tool-calling is to use prebuilt ReAct agent graph</span>
-<span class="c1"># that consists of a tool-calling LLM node (i.e. supervisor) and a tool-executing node</span>
-<span class="n">supervisor_with_tools</span> <span class="o">=</span> <span class="n">create_react_agent</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tools</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="n">supervisor_with_tools_prompt</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"my_custom_agent_name"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 </div>
 </div>
@@ -9483,12 +9507,44 @@ code to perform the multiplication and print the requested output format.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
-
-<span class="n">png_data</span> <span class="o">=</span> <span class="n">supervisor_with_tools</span><span class="o">.</span><span class="n">get_graph</span><span class="p">()</span><span class="o">.</span><span class="n">draw_mermaid_png</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">tools</span> <span class="o">=</span> <span class="p">[</span><span class="n">symbolic_reasoning_tool</span><span class="p">,</span> <span class="n">google_search_tool</span><span class="p">,</span> <span class="n">python_tool</span><span class="p">]</span>
+<span class="c1"># The simplest way to build a supervisor w/ tool-calling is to use prebuilt ReAct agent graph</span>
+<span class="c1"># that consists of a tool-calling LLM node (i.e. supervisor) and a tool-executing node</span>
+<span class="n">supervisor_with_tools</span> <span class="o">=</span> <span class="n">create_react_agent</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> 
+                                           <span class="n">tools</span><span class="p">,</span> 
+                                           <span class="n">prompt</span><span class="o">=</span><span class="n">supervisor_with_tools_prompt</span><span class="p">,</span> 
+                                           <span class="n">name</span><span class="o">=</span><span class="s2">"my_custom_agent_name"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>C:\Users\mrezv\AppData\Local\Temp\ipykernel_25508\3597777928.py:4: LangGraphDeprecatedSinceV10: create_react_agent has been moved to `langchain.agents`. Please update your import to `from langchain.agents import create_agent`. Deprecated in LangGraph V1.0 to be removed in V2.0.
+  supervisor_with_tools = create_react_agent(model,
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">png_data</span> <span class="o">=</span> <span class="n">supervisor_with_tools</span><span class="o">.</span><span class="n">get_graph</span><span class="p">()</span><span class="o">.</span><span class="n">draw_mermaid_png</span><span class="p">()</span>
 <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">png_data</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -9514,6 +9570,17 @@ code to perform the multiplication and print the requested output format.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The tools in the graph above are implemented as ReAct agents. When a user asks a question, the agent invokes the appropriate tool to generate the response.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 </div>
 </div>
 </div>
@@ -9522,7 +9589,7 @@ code to perform the multiplication and print the requested output format.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">"""Write a Python code that prints letter of a word in reversed order."""</span>
@@ -9536,7 +9603,7 @@ code to perform the multiplication and print the requested output format.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">supervisor_with_tools</span><span class="o">.</span><span class="n">stream</span><span class="p">({</span><span class="s2">"messages"</span><span class="p">:</span> <span class="p">[</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">query</span><span class="p">)]}):</span>
@@ -9558,14 +9625,23 @@ code to perform the multiplication and print the requested output format.
 ┃                                                 <span style="font-weight: bold">🤖 Agent: agent</span>                                                 ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">python_tool</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'task': "word = 'example'; print(word[::-1])"}</span>                                       
+🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">python_tool</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'task': '# Python code to print the letters of a word in reversed order\n\nword = </span>   
+<span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">"example"\nreversed_word = word[::-1]\nprint(reversed_word)'}</span>                                                      
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>C:\Users\mrezv\AppData\Local\Temp\ipykernel_25508\143683217.py:38: LangGraphDeprecatedSinceV10: create_react_agent has been moved to `langchain.agents`. Please update your import to `from langchain.agents import create_agent`. Deprecated in LangGraph V1.0 to be removed in V2.0.
+  agent = create_react_agent(agents['python_agent'][0],
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre><span class="ansi-green-intense-fg ansi-bold">content='elpmaxe\n' name='Python_REPL' tool_call_id='call_FsribShcPFfBVVqqldwjJd0y'</span></pre>
+<pre><span class="ansi-green-intense-fg ansi-bold">content='elpmaxe\n' name='Python_REPL' tool_call_id='call_fSuFnm9J0sHEK1EGHmKqIPd1'</span></pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
@@ -9575,7 +9651,8 @@ code to perform the multiplication and print the requested output format.
 ┃                                                 <span style="font-weight: bold">🤖 Agent: tools</span>                                                 ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-⚙️ <span style="font-weight: bold">Tool Result:</span> The reversed word is <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">elpmaxe</span>.                                                                       
+⚙️ <span style="font-weight: bold">Tool Result:</span> The code you provided prints the letters of the word "example" in reversed order, resulting in      
+"elpmaxe". If you need any further assistance or modifications, please let me know!                                
 </pre>
 </div>
 </div>
@@ -9586,37 +9663,40 @@ code to perform the multiplication and print the requested output format.
 ┃                                                 <span style="font-weight: bold">🤖 Agent: agent</span>                                                 ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-💬 <span style="font-weight: bold">Response:</span> The reversed word is <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">elpmaxe</span>. Here is the Python code used to achieve this:                           
+💬 <span style="font-weight: bold">Response:</span> Here is the Python code that prints the letters of the word "example" in reversed order:              
 
 <span style="background-color: #272822">                                                                                                                   </span>
-<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">word </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">'example'</span><span style="background-color: #272822">                                                                                                  </span>
-<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">print(word[::</span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">-</span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">1</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">])</span><span style="background-color: #272822">                                                                                                 </span>
+<span style="background-color: #272822"> </span><span style="color: #959077; text-decoration-color: #959077; background-color: #272822"># Python code to print the letters of a word in reversed order</span><span style="background-color: #272822">                                                    </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">word </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">"example"</span><span style="background-color: #272822">                                                                                                  </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">reversed_word </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> word[::</span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">-</span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">1</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">]</span><span style="background-color: #272822">                                                                                        </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">print(reversed_word)</span><span style="background-color: #272822">                                                                                              </span>
 <span style="background-color: #272822">                                                                                                                   </span>
+
+When executed, this code will output: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">elpmaxe</span>.                                                                     
+
+If you need any further modifications or assistance, feel free to ask!                                             
 </pre>
 </div>
 </div>
 </div>
 </div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The supervisor is essentially an agent that invokes tools, where those tools can themselves be ReAct agents. This makes a supervisor tool-calling architecture a strong choice for multi-agent systems that <strong>rely on smaller, specialized agents</strong>. When all agents are powered by highly capable reasoning models (such as the latest generation of LLMs), an any-to-any network can also work effectively because agents can communicate and coordinate directly. However, a supervisor-based architecture provides greater control over context flow, allowing developers to explicitly manage what information is passed between agents and what is ultimately exposed to the user.</p>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">"""</span>
@@ -9633,7 +9713,7 @@ code to perform the multiplication and print the requested output format.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">supervisor_with_tools</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span>
@@ -9656,9 +9736,20 @@ code to perform the multiplication and print the requested output format.
 ┃                                                 <span style="font-weight: bold">🤖 Agent: agent</span>                                                 ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">google_search_tool</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'task': 'average residential property price in Calgary for June 2026'}</span>        
+🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">google_search_tool</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'task': 'average residential property price in Calgary June 2026'}</span>            
 
-🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">python_tool</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'task': 'price = average_price\nnew_price = price * 1.02\nnew_price'}</span>                
+🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">python_tool</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'task': 'price = 0 # Store the average price in this variable after fetching the </span>    
+<span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">data\nprice_increase = price * 0.02 # Calculate 2% increase in price'}</span>                                             
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>C:\Users\mrezv\AppData\Local\Temp\ipykernel_25508\143683217.py:22: LangGraphDeprecatedSinceV10: create_react_agent has been moved to `langchain.agents`. Please update your import to `from langchain.agents import create_agent`. Deprecated in LangGraph V1.0 to be removed in V2.0.
+  agent = create_react_agent(agents['google_search_agent'][0],
+C:\Users\mrezv\AppData\Local\Temp\ipykernel_25508\143683217.py:38: LangGraphDeprecatedSinceV10: create_react_agent has been moved to `langchain.agents`. Please update your import to `from langchain.agents import create_agent`. Deprecated in LangGraph V1.0 to be removed in V2.0.
+  agent = create_react_agent(agents['python_agent'][0],
 </pre>
 </div>
 </div>
@@ -9666,7 +9757,7 @@ code to perform the multiplication and print the requested output format.
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>INPUT TO TOOL: average residential property price in Calgary June 2026
-<span class="ansi-green-intense-fg ansi-bold">content='' name='Python_REPL' tool_call_id='call_y1poFe1DpUsBle1fxF4QAOkW'</span></pre>
+<span class="ansi-green-intense-fg ansi-bold">content='' name='Python_REPL' tool_call_id='call_5mhSf5fJm9cNAVPvTMCs2U7C'</span></pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
@@ -9676,8 +9767,8 @@ code to perform the multiplication and print the requested output format.
 ┃                                                 <span style="font-weight: bold">🤖 Agent: tools</span>                                                 ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-⚙️ <span style="font-weight: bold">Tool Result:</span> The variable <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">average_price</span> was not defined prior to its use. Could you please provide a value for   
-<span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">average_price</span> or specify what it should be?                                                                        
+⚙️ <span style="font-weight: bold">Tool Result:</span> The average residential property price in Calgary around June 2026 is approximately $570,500        
+according to the Calgary Real Estate Board (CREB).                                                                 
 </pre>
 </div>
 </div>
@@ -9688,12 +9779,8 @@ code to perform the multiplication and print the requested output format.
 ┃                                                 <span style="font-weight: bold">🤖 Agent: tools</span>                                                 ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-⚙️ <span style="font-weight: bold">Tool Result:</span> The average residential property prices in Calgary for June 2026 include:                           
-
-<span style="color: #808000; text-decoration-color: #808000; font-weight: bold"> • </span>Detached homes: $844,352                                                                                        
-<span style="color: #808000; text-decoration-color: #808000; font-weight: bold"> • </span>Semi-detached homes: $658,309                                                                                   
-
-These prices reflect a slight decline for some property types compared to the previous year.                       
+⚙️ <span style="font-weight: bold">Tool Result:</span> The current value of price_increase is 0 because the initial price is set to 0. If you want to      
+calculate the 2% increase for a different price, please provide the price value.                                   
 </pre>
 </div>
 </div>
@@ -9704,36 +9791,24 @@ These prices reflect a slight decline for some property types compared to the pr
 ┃                                                 <span style="font-weight: bold">🤖 Agent: agent</span>                                                 ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-🔧 <span style="font-weight: bold">Tool:</span> <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">python_tool</span> | Args: <span style="color: #008080; text-decoration-color: #008080; background-color: #000000; font-weight: bold">{'task': 'average_price = 844352\nnew_price = average_price * 1.02\nnew_price'}</span>       
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre><span class="ansi-green-intense-fg ansi-bold">content='' name='Python_REPL' tool_call_id='call_vWw0fweSdIroUDPm7yL8Iasq'</span><span class="ansi-green-intense-fg ansi-bold">content='861239.04\n' name='Python_REPL' tool_call_id='call_ubwPyJajcTRzgy9SnPase7mr'</span></pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃                                                 <span style="font-weight: bold">🤖 Agent: tools</span>                                                 ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+💬 <span style="font-weight: bold">Response:</span> The average residential property price in Calgary for June 2026 is approximately <span style="font-weight: bold">$570,500</span>.            
 
-⚙️ <span style="font-weight: bold">Tool Result:</span> The new price after applying a 2% increase is <span style="font-weight: bold">861239.04</span>.                                            
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃                                                 <span style="font-weight: bold">🤖 Agent: agent</span>                                                 ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+Now, here's the Python program to store the price in a variable and calculate the price after a 2% increase:       
 
-💬 <span style="font-weight: bold">Response:</span> The average residential property price in Calgary for June 2026 is approximately <span style="font-weight: bold">$844,352</span>. After      
-applying a 2% increase, the new price would be <span style="font-weight: bold">$861,239.04</span>.                                                        
+<span style="background-color: #272822">                                                                                                                   </span>
+<span style="background-color: #272822"> </span><span style="color: #959077; text-decoration-color: #959077; background-color: #272822"># Store the average price in this variable</span><span style="background-color: #272822">                                                                        </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">price </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">570500</span><span style="background-color: #272822">                                                                                                    </span>
+<span style="background-color: #272822">                                                                                                                   </span>
+<span style="background-color: #272822"> </span><span style="color: #959077; text-decoration-color: #959077; background-color: #272822"># Calculate 2% increase in price</span><span style="background-color: #272822">                                                                                  </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">price_increase </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> price </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">*</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> </span><span style="color: #ae81ff; text-decoration-color: #ae81ff; background-color: #272822">0.02</span><span style="background-color: #272822">                                                                                     </span>
+<span style="background-color: #272822">                                                                                                                   </span>
+<span style="background-color: #272822"> </span><span style="color: #959077; text-decoration-color: #959077; background-color: #272822"># New price after increase</span><span style="background-color: #272822">                                                                                        </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">new_price </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">=</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> price </span><span style="color: #ff4689; text-decoration-color: #ff4689; background-color: #272822">+</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822"> price_increase</span><span style="background-color: #272822">                                                                                </span>
+<span style="background-color: #272822">                                                                                                                   </span>
+<span style="background-color: #272822"> </span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">print(</span><span style="color: #e6db74; text-decoration-color: #e6db74; background-color: #272822">"New price after 2% increase:"</span><span style="color: #f8f8f2; text-decoration-color: #f8f8f2; background-color: #272822">, new_price)</span><span style="background-color: #272822">                                                                  </span>
+<span style="background-color: #272822">                                                                                                                   </span>
+
+This code will store the average price and calculate the new price after applying a 2% increase.                   
 </pre>
 </div>
 </div>
@@ -9756,6 +9831,43 @@ applying a 2% increase, the new price would be <span style="font-weight: bold">$
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Recap">Recap<a class="anchor-link" href="#Recap">¶</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The key question is <strong>when to use each of these architectures</strong>.</p>
+<p>A centralized, supervisor-based model works best for <strong>structured enterprise workflows</strong>—such as SDR (Sales Development Representative) pipelines—where tasks are predictable, sequential, and require tight coordination and control.</p>
+<p>At the other end of the spectrum, a decentralized any-to-any network is better suited for <strong>creative or exploratory work</strong>, such as collaborative research, where agents benefit from autonomy and flexibility and can dynamically decide how to approach a problem. This approach becomes especially effective when all participating agents <strong>are powered by highly capable reasoning models (LLMs)</strong>, allowing them to communicate and coordinate directly without a central controller.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Between these two extremes sits the <strong>supervisor-as-tool-caller architecture</strong>. In this pattern, the supervisor is itself an agent that invokes tools, where those tools can be specialized ReAct agents. This makes it a strong choice for systems composed of <strong>smaller, focused agents that still require centralized orchestration</strong>. The architecture balances control and flexibility: sub-agents remain specialized and efficient, while the supervisor manages coordination and decision-making.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>A key advantage of supervisor-based approaches is <strong>control over context flow</strong>. Rather than allowing unrestricted communication between agents, the supervisor can explicitly decide what information is passed to each agent and what is ultimately returned to the user. This improves transparency and predictability while reducing unnecessary context sharing.</p>
+<p>As a result, supervisor-based architectures are often preferred when <strong>workflow control and context management</strong> are critical, whereas any-to-any networks are most effective when <strong>agent autonomy and collaborative problem-solving</strong> are the primary goals.</p>
 </div>
 </div>
 </div>
